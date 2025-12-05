@@ -1,0 +1,14 @@
+:root{
+  --primary: #1d3a6d;
+  --accent: #d5ab4e;
+  --bg: #f8f9fa;
+}
+body{background: var(--bg); color: #222;}
+.text-primary{color:var(--primary) !important;}
+.text-accent{color:var(--accent) !important;}
+.navbar-brand{color:var(--primary) !important;}
+.skill-card{background:rgba(29,58,109,0.05); border-radius:10px; border:1px solid rgba(29,58,109,0.1);}
+a{text-decoration:none;}
+a:hover{color:var(--accent) !important;}
+.btn-primary{background: var(--primary); border-color: var(--primary);}
+.btn-primary:hover{background: var(--accent); border-color: var(--accent); color:#111;}
