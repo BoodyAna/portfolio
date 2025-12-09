@@ -1,158 +1,224 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Abdullah Khaled — Math Teacher & .NET MAUI Developer</title>
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- AOS (fallback reveals) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Project styles -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="font-family: Poppins, sans-serif;">
-
-<!-- NAV -->
-<nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold text-primary" href="#">Abdullah Khaled</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </div>
+<body>
+  <!-- Loader -->
+  <div id="loader" role="status" aria-live="polite">
+    <div class="loader-ring" aria-hidden="true"></div>
+    <div class="loader-text">Loading portfolio…</div>
   </div>
-</nav>
 
-<!-- HERO -->
-<header class="py-5 text-center">
-  <div class="container">
-    <h1 class="display-6 fw-bold text-primary">Hi — I'm Abdullah Khaled</h1>
-    <p class="lead mt-3">Math Teacher & .NET MAUI Developer — blending education and technology.</p>
-    <a class="btn btn-primary me-2" href="#projects">See Projects</a>
-    <a class="btn btn-outline-primary" href="#contact">Contact Me</a>
-    <div class="mt-4">
-      <img src="assets/images/CvPic.jpg" alt="Profile" class="rounded shadow-sm" style="max-width:220px;">
-    </div>
-  </div>
-</header>
+  <!-- streak canvas -->
+  <canvas id="streak"></canvas>
 
-<!-- ABOUT -->
-<section id="about" class="py-5">
-  <div class="container">
-    <h2 class="fw-bold text-primary text-center mb-4">About Me</h2>
-    <p class="text-center">A results-driven professional with dual expertise in mathematics education and mobile development. Abdullah Khaled has successfully taught grades 1–11 across national and international schools while developing high-quality .NET MAUI applications. He combines pedagogical insight with technical proficiency to deliver engaging learning experiences and robust digital solutions.</p>
-  </div>
-</section>
+  <!-- custom cursor -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
-<!-- SKILLS -->
-<section id="skills" class="py-5 bg-white border-top">
-  <div class="container">
-    <h3 class="fw-bold text-primary text-center mb-4">Skills</h3>
-    <div class="row g-3 justify-content-center">
-      <div class="col-sm-6 col-md-3">
-        <div class="skill-card p-3 text-center h-100">
-          <h5>Math Teaching</h5>
-          <p class="small text-muted">Curriculum delivery · Conceptual teaching · Inquiry-based learning · Student-centered</p>
-        </div>
+  <!-- Nav -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="nav-wrap container d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <a class="navbar-brand me-3" href="#">Abdullah Khaled</a>
+        <div class="text-muted small">Math Teacher • .NET MAUI Developer</div>
       </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="skill-card p-3 text-center h-100">
-          <h5>.NET MAUI Development</h5>
-          <p class="small text-muted">C# · XAML · MVVM · Prism.MAUI · API integration</p>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-3">
-        <div class="skill-card p-3 text-center h-100">
-          <h5>Tools & Soft Skills</h5>
-          <p class="small text-muted">Polly, SignalR · Team collaboration · Problem solving · Creativity</p>
+
+      <div class="d-flex align-items-center">
+        <button class="navbar-toggler btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">☰</button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- PROJECTS -->
-<section id="projects" class="py-5">
-  <div class="container">
-    <h3 class="fw-bold text-primary text-center mb-4">Selected Projects</h3>
-    <div class="row g-4">
-      <div class="col-md-6">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">TriplBliss</h5>
-            <p>Built a travel planning app with trip management, 3rd-party API integration, and user authentication.</p>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div class="hero-left">
+        <h1 class="hero-title" id="heroTitle">Hi — I'm <span class="accent">Abdullah Khaled</span></h1>
+        <div class="typing-wrap glass-card mt-3">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div id="typedText" style="font-weight:600;">Math Teacher & .NET MAUI Developer</div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">Cardrly</h5>
-            <p>Developed a digital business card app featuring QR generation,contact management, and secure sharing.</p>
-          </div>
+
+        <p class="hero-sub mt-4">I build educational experiences and cross-platform apps. I design clean architectures and ship with tests.</p>
+
+        <div class="mt-4 d-flex gap-3 align-items-center">
+          <button class="mag-btn" id="primaryCTA">See Projects</button>
+          <button class="mag-btn" id="secondaryCTA" style="background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--accent)">Contact</button>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="card h-100 shadow-sm">
-          <div class="card-body">
-            <h5 class="card-title">FixPro</h5>
-            <p>Created a service marketplace app with booking, payment integration, and real-time notifications.</p>
-          </div>
+
+      <div class="hero-right">
+        <div class="portrait" id="portraitCard" role="img" aria-label="Portrait">
+          <img src="assets/images/CvPic.jpg" alt="Abdullah portrait">
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- EXPERIENCE -->
-<section id="experience" class="py-5 bg-light border-top">
-  <div class="container">
-    <h3 class="fw-bold text-primary text-center mb-5">Experience</h3>
-    <div class="row g-4">
-      <div class="col-md-6">
-        <h5 class="fw-bold text-accent mb-3">Mathematics Teacher</h5>
-        <ul>
-          <li><strong>2023–2024:</strong> Alentesar Language School — Grades 4–9</li>
-          <li><strong>2024–2025:</strong> 25 January Revolution Official Distinguished Language School — Grades 4–11</li>
-          <li><strong>2025–2026:</strong> First International School — Grades 1–4</li>
-        </ul>
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="glass-card">
+        <h2>About Me</h2>
+        <p>A results-driven professional blending mathematics pedagogy and cross-platform mobile engineering (.NET MAUI).</p>
       </div>
-      <div class="col-md-6">
-        <h5 class="fw-bold text-accent mb-3">.NET MAUI Developer</h5>
-        <ul>
-          <li><strong>2022–Present:</strong> Remote — cross-platform apps with MVVM</li>
-          <li><strong>2024–2025:</strong> EngProSoft
-            <ul>
-              <li>TriplBliss: Travel planning app</li>
-              <li>Cardrly: Digital business card app</li>
-              <li>FixProUs: Service marketplace app</li>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <div class="glass-card">
+        <h3>Skills</h3>
+        <div class="row mt-3">
+          <div class="col-md-4"><strong>Math Teaching</strong><p class="text-muted">Inquiry-based, conceptual, assessment design</p></div>
+          <div class="col-md-4"><strong>.NET MAUI</strong><p class="text-muted">C#, XAML, MVVM, Prism, API integration</p></div>
+          <div class="col-md-4"><strong>Tools</strong><p class="text-muted">Polly, SignalR, CI/CD, Unit & UI tests</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <h3>Selected Projects</h3>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="proj-card">
+          <div class="proj-inner" data-proj>
+            <a class="proj-front" href="https://play.google.com/store/apps/details?id=triplbliss" target="_blank" rel="noopener noreferrer">
+              <div>
+                <h5>TriplBliss</h5>
+                <p class="text-muted">Travel planner — routes, bookings, maps & auth.</p>
+              </div>
+            </a>
+
+            <div class="proj-back">
+              <div>
+                <h6>Details</h6>
+                <p class="text-muted small">Built with MVVM, offline caching, and maps integration. Tap to open store.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="proj-card">
+          <div class="proj-inner" data-proj>
+            <a class="proj-front" href="https://play.google.com/store/apps/details?id=cardrly" target="_blank" rel="noopener noreferrer">
+              <div>
+                <h5>Cardrly</h5>
+                <p class="text-muted">Digital business card, QR, secure share.</p>
+              </div>
+            </a>
+
+            <div class="proj-back">
+              <div>
+                <h6>Details</h6>
+                <p class="text-muted small">QR generation, sync, contact import/export.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="proj-card">
+          <div class="proj-inner" data-proj>
+            <a class="proj-front" href="https://play.google.com/store/apps/details?id=fixprous" target="_blank" rel="noopener noreferrer">
+              <div>
+                <h5>FixPro</h5>
+                <p class="text-muted">Service marketplace with booking & payments.</p>
+              </div>
+            </a>
+
+            <div class="proj-back">
+              <div>
+                <h6>Details</h6>
+                <p class="text-muted small">Real-time notifications, payments, rating system.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="glass-card">
+        <h3>Experience</h3>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <h6>Mathematics Teacher</h6>
+            <ul class="text-muted">
+              <li>2025–Present: First International School</li>
+              <li>2024–2025: 25 January Distinguished School</li>
+              <li>2023–2024: Alentesar Language School</li>
             </ul>
-          </li>
-        </ul>
+          </div>
+          <div class="col-md-6">
+            <h6>.NET MAUI Developer</h6>
+            <ul class="text-muted">
+              <li>2022–Present: Remote projects</li>
+              <li>EngProSoft: TriplBliss • Cardrly • FixProUs</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact" class="py-5 bg-white border-top">
-  <div class="container text-center">
-    <h3 class="fw-bold text-primary mb-3">Contact</h3>
-    <p class="text-muted">Phone: +201551541190 | Email: <a href="mailto:boodyakl12@gmail.com">boodyakl12@gmail.com</a> | Egypt, Assiut</p>
-  </div>
-</section>
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="glass-card text-center">
+        <h3>Contact</h3>
+        <p class="text-muted">Phone: +201551541190 • Email: <a href="mailto:boodyakl12@gmail.com">boodyakl12@gmail.com</a> • Assiut, Egypt</p>
+      </div>
+    </div>
+  </section>
 
-<!-- FOOTER -->
-<footer class="py-4 text-center text-muted">
-  <div>Made by <strong>Abdullah Khaled</strong> — Math teacher & .NET MAUI developer</div>
-</footer>
+  <footer>
+    Made by <strong>Abdullah Khaled</strong> • Math teacher & .NET MAUI developer
+  </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- External libs -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollToPlugin.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollSmoother.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Project script -->
+  <script src="js/main.js"></script>
 </body>
 </html>
